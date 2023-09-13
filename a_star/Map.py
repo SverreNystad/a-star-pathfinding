@@ -353,11 +353,11 @@ class Map_Obj():
         # Show image
         image.show()
 
-    def cost_estimate(self, start_position: list[int, int], goal_position: list[int, int]) -> float:
+    def cost_estimate(self, position: list[int, int]) -> float:
         """
         cost = f(n) = g(n) + h(n)
         """
-        return self.distance_from_start(start_position) + self.a_star_heuristic(goal_position)
+        return self.distance_from_start(position) + self.a_star_heuristic(position)
     
     def a_star_heuristic(self, pos: list[int, int]) -> float:
         """
