@@ -352,3 +352,20 @@ class Map_Obj():
                                y * scale + j] = colors[themap[y][x]]
         # Show image
         image.show()
+
+
+if __name__ == "__main__":
+    # Instantiate a map object for task 1
+    map_obj = Map_Obj(1)
+    # Print the map
+    map_obj.show_map(map_obj.str_map)
+
+    # Instantiate a map object for task 2
+    map_obj = Map_Obj(2)
+    # Print the map
+    map_obj.show_map(map_obj.str_map)
+
+    # Instantiate a map object for task 3
+    map_obj = Map_Obj(3)
+    # Print the map
+    map_obj.show_map(map_obj.str_map)
