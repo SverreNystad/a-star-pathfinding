@@ -353,6 +353,38 @@ class Map_Obj():
         # Show image
         image.show()
 
+    def cost_estimate(self, start_position: list[int, int], goal_position: list[int, int]) -> float:
+        """
+        cost = f(n) = g(n) + h(n)
+        """
+        return self.distance_from_start(start_position) + self.a_star_heuristic(goal_position)
+    
+    def a_star_heuristic(self, pos: list[int, int]) -> float:
+        """
+        A heuristic function for A*. Calculates the manhattan distance
+
+        Parameters
+        ----------
+        pos : list[int, int]
+            Position for which we want to calculate the heuristic
+
+        Returns
+        -------
+        float
+            Heuristic value for `pos`
+        """
+        # Calculate the heuristic value for the given position
+        # Manhatten distance = |x1 - x2| + |y1 - y2|
+        x_distance = abs(pos[0] - self.goal_pos[0])
+        y_distance = abs(pos[1] - self.goal_pos[1])
+        return x_distance + y_distance
+    
+
+    def distance_from_start(self, pos: list[int, int]) -> float:
+        """
+        
+        """
+        return 0
 
 if __name__ == "__main__":
     # Instantiate a map object for task 1
