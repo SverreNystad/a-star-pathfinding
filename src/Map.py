@@ -9,6 +9,7 @@ np.set_printoptions(threshold=np.inf, linewidth=300)
 # Extended and documented by Xavier Sánchez-Díaz
 
 
+
 class Map_Obj():
     """
     A map object helper class.
@@ -353,31 +354,31 @@ class Map_Obj():
         # Show image
         image.show()
 
+
+    def a_star(self):
+        
+        frontier = Frontier(self.start_pos, self)
+
+        # For node n, came_from[n] is the node immediately preceding it on the cheapest path from the start to n currently known.
+        came_from = {}
+
+        g_score = {}
+        # The sentinel value is not infinity but rather None, So all values not explicitly set are None
+        g_score[self.start_pos] = 0
+
+        f_score = {}
+        f_score[self.start_pos] = self.a_star_heuristic(self.start_pos)
+
+        while not frontier.is_empty():
+            current = frontier.pop()
+            
+
+
     def cost_estimate(self, position: list[int, int]) -> float:
         """
         cost = f(n) = g(n) + h(n)
         """
         return self.distance_from_start(position) + self.a_star_heuristic(position)
-    
-    def a_star_heuristic(self, pos: list[int, int]) -> float:
-        """
-        A heuristic function for A*. Calculates the manhattan distance
-
-        Parameters
-        ----------
-        pos : list[int, int]
-            Position for which we want to calculate the heuristic
-
-        Returns
-        -------
-        float
-            Heuristic value for `pos`
-        """
-        # Calculate the heuristic value for the given position
-        # Manhatten distance = |x1 - x2| + |y1 - y2|
-        x_distance = abs(pos[0] - self.goal_pos[0])
-        y_distance = abs(pos[1] - self.goal_pos[1])
-        return x_distance + y_distance
     
 
     def distance_from_start(self, pos: list[int, int]) -> float:
@@ -388,16 +389,13 @@ class Map_Obj():
 
 if __name__ == "__main__":
     # Instantiate a map object for task 1
-    map_obj = Map_Obj(1)
-    # Print the map
-    map_obj.show_map(map_obj.str_map)
+    task_1_map = Map_Obj(1)
+    task_1_map.show_map()
 
     # Instantiate a map object for task 2
-    map_obj = Map_Obj(2)
-    # Print the map
-    map_obj.show_map(map_obj.str_map)
+    task_2_map = Map_Obj(2)
+    task_2_map.show_map()
 
     # Instantiate a map object for task 3
-    map_obj = Map_Obj(3)
-    # Print the map
-    map_obj.show_map(map_obj.str_map)
+    task_3_map = Map_Obj(3)
+    task_3_map.show_map()
