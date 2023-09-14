@@ -62,8 +62,13 @@ def a_star(map: "Map_Obj", start_pos: list[int, int]=None, goal_pos: list[int, i
     estimated_remaining_distance[start_pos] = a_star_heuristic(start_pos)
 
     while not frontier.is_empty():
+        # Get the node with the lowest estimated distance from goal_pos from the frontier
+        # And remove it from the frontier
         current = frontier.pop()
-
+        if current == goal_pos:
+            return reconstruct_path(came_from, current)
+        
+        
 
 def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int, int]]:
     """
