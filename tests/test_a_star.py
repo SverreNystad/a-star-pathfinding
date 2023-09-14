@@ -100,7 +100,7 @@ def test_a_star_heuristic_negative_difference():
 def test_reconstructing_path():
     # Arrange
     came_from = {(0, 0): (0, 1), (0, 1): (0, 2), (0, 2): (0, 3)}
-    current = (0, 3)
+    current = (0, 0)
     # Act
     total_path = reconstruct_path(came_from, current)
     # Assert
@@ -129,8 +129,8 @@ def test_reconstructing_path_when_there_are_several_paths():
     came_from_path_1 = {(0, 0): (0, 1), (0, 1): (0, 2)}
     came_from_path_2 = {(10, 0): (9, 1), (9, 1): (8, 2)}
     came_from_path_1.update(came_from_path_2)
-    current_1 = (0, 2)
-    current_2 = (8, 2)
+    current_1 = (0, 0)
+    current_2 = (10, 0)
     # Act
     total_path_1 = reconstruct_path(came_from_path_1, current_1)
     total_path_2 = reconstruct_path(came_from_path_2, current_2)
@@ -155,4 +155,4 @@ def test_a_star_when_start_is_goal():
     # Act
     path = a_star(map_obj, map_obj.start_pos, map_obj.start_pos)
     # Assert
-    assert path == [map_obj.start_pos]
+    assert path == [tuple(map_obj.start_pos)]

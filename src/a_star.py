@@ -69,7 +69,7 @@ def a_star(map: Map_Obj, start_pos: list[int, int]=None, goal_pos: list[int, int
         # And remove it from the frontier
         current = frontier.pop()
         if current == goal_pos:
-            return reconstruct_path(came_from, current)
+            return reconstruct_path(came_from, tuple(current))
 
         for neighbor in map.get_neighbors(current):
             # d(current,neighbor) is the weight of the edge from current to neighbor
@@ -103,18 +103,12 @@ def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int,
         The path from the start to the goal node
     """
     total_path = [current]
-    # Need to find the parent of the value in the dictionary
-    while True:
-        parent = _get_key_from_value(current, came_from)
-        # There must be a parent and the path must not be a loop
-        if parent is None or parent == current:
+    while current in came_from.keys():
+        # Stop if there is a cycle in the path
+        if current == came_from[current]:
             break
-        current = parent
-        total_path.append(parent)
-        
-    
-    # Reverse the path so that it starts from the start node
-    total_path.reverse()
+        current = came_from[current]
+        total_path.append(current)
     return total_path
 
 def _get_key_from_value(value: list[int, int], dictionary: dict) -> list[int, int]:
