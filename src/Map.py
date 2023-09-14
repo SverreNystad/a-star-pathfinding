@@ -66,6 +66,8 @@ class Map_Obj():
             and the map as a string of symbols.
         """
         # Read map from provided csv file
+        if __name__ != "__main__":
+            path = 'src/' + path
         df = pd.read_csv(path, index_col=None,
                          header=None)  # ,error_bad_lines=False)
         # Convert pandas dataframe to numpy array
