@@ -4,10 +4,10 @@ class Frontier:
     """
     The frontier is a priority queue of nodes. The nodes are sorted by it cost.
     """
-    def __init__(self, start_pos: list[int, int],  map_obj: "Map_Obj"):
+    def __init__(self, start_pos: list[int, int], goal_pos: list[int, int]):
         """ Instantiate a frontier object. """
         self.frontier = [start_pos]
-        self._map = map_obj
+        self.goal_pos = goal_pos
 
     def get_frontier(self) -> list[int, int]:
         """ Getter for the frontier """
@@ -19,7 +19,7 @@ class Frontier:
         correct position based on its cost.
         """
         self.frontier.append(node)
-        self.frontier.sort(reverse=True, key=lambda node: self._map.get_cell_value(node))
+        self.frontier.sort(reverse=True, key=lambda node: a_star_heuristic(node, self.goal_pos))
 
     def pop(self):
         """
@@ -46,6 +46,24 @@ def a_star(map: "Map_Obj", start_pos: list[int, int]=None, goal_pos: list[int, i
 
     start_pos = map.get_start_pos()
     goal_pos = map.get_goal_pos()
+
+    # Initialize the frontier with the start position
+    frontier = Frontier(start_pos, map)
+    # Initialize the came_from dictionary
+    # For node n, came_from[n] is the node immediately preceding it on the cheapest path from the start to n currently known.
+
+    came_from = {}
+    # Initialize the cost_to_reach_position dictionary, the first node has no cost
+    # The sentinel value is not infinity but rather None, So all values not explicitly set are None
+    cost_to_reach_position = {}
+    cost_to_reach_position[start_pos] = 0
+
+    estimated_remaining_distance = {}
+    estimated_remaining_distance[start_pos] = a_star_heuristic(start_pos)
+
+    while not frontier.is_empty():
+        current = frontier.pop()
+
 
 def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int, int]]:
     """
