@@ -33,9 +33,12 @@ class Frontier:
         return len(self.frontier) == 0
     
 
-def a_star(map: "Map_Obj", start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
+def a_star(map: Map_Obj, start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
     """
     A* algorithm implementation
+
+    Returns:
+        The path from the start to the goal node or None if no path exists
     """
     
     # Set start and goal positions if they are given or use the ones from the map
@@ -48,7 +51,7 @@ def a_star(map: "Map_Obj", start_pos: list[int, int]=None, goal_pos: list[int, i
     goal_pos = map.get_goal_pos()
 
     # Initialize the frontier with the start position
-    frontier = Frontier(start_pos, map)
+    frontier = Frontier(start_pos, goal_pos)
     # Initialize the came_from dictionary
     # For node n, came_from[n] is the node immediately preceding it on the cheapest path from the start to n currently known.
 
@@ -56,10 +59,10 @@ def a_star(map: "Map_Obj", start_pos: list[int, int]=None, goal_pos: list[int, i
     # Initialize the cost_to_reach_position dictionary, the first node has no cost
     # The sentinel value is not infinity but rather None, So all values not explicitly set are None
     cost_to_reach_position = {}
-    cost_to_reach_position[start_pos] = 0
+    cost_to_reach_position[tuple(start_pos)] = 0
 
     estimated_remaining_distance = {}
-    estimated_remaining_distance[start_pos] = a_star_heuristic(start_pos)
+    estimated_remaining_distance[tuple(start_pos)] = a_star_heuristic(start_pos, goal_pos)
 
     while not frontier.is_empty():
         # Get the node with the lowest estimated distance from goal_pos from the frontier
@@ -67,9 +70,23 @@ def a_star(map: "Map_Obj", start_pos: list[int, int]=None, goal_pos: list[int, i
         current = frontier.pop()
         if current == goal_pos:
             return reconstruct_path(came_from, current)
-        
-        
 
+        for neighbor in map.get_neighbors(current):
+            # d(current,neighbor) is the weight of the edge from current to neighbor
+            # tentative_cost_to_reach is the distance from start to the neighbor through current
+            tentative_cost_to_reach = cost_to_reach_position[tuple(current)] + map.get_cell_value(neighbor)
+            current_cost = cost_to_reach_position.get(tuple(neighbor))
+            
+            if current_cost is None or tentative_cost_to_reach < current_cost:
+                # This path to neighbor is better than any previous one. Record it!
+                
+                came_from[tuple(neighbor)] = tuple(current)
+                cost_to_reach_position[tuple(neighbor)] = tentative_cost_to_reach
+                estimated_remaining_distance[tuple(neighbor)] = tentative_cost_to_reach + a_star_heuristic(neighbor, goal_pos)
+                if neighbor not in frontier.get_frontier():
+                    frontier.insert(neighbor)
+            # pass
+    return None
 def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int, int]]:
     """
     Reconstructs the path from the start to the goal node
