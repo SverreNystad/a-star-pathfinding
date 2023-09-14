@@ -4,7 +4,7 @@ class Frontier:
     """
     The frontier is a priority queue of nodes. The nodes are sorted by it cost.
     """
-    def __init__(self, start_pos: list[int, int],  map_obj: Map_Obj):
+    def __init__(self, start_pos: list[int, int],  map_obj: "Map_Obj"):
         """ Instantiate a frontier object. """
         self.frontier = [start_pos]
         self._map = map_obj
@@ -33,7 +33,7 @@ class Frontier:
         return len(self.frontier) == 0
     
 
-def a_star(map: Map_Obj, start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
+def a_star(map: "Map_Obj", start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
     """
     A* algorithm implementation
     """
@@ -64,10 +64,27 @@ def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int,
         The path from the start to the goal node
     """
     total_path = [current]
-    while current in came_from.items():
-        current = came_from[current]
-        total_path.append(current)
+    # Need to find the parent of the value in the dictionary
+    while True:
+        parent = _get_key_from_value(current, came_from)
+        if parent is None:
+            break
+        current = parent
+        total_path.append(parent)
+        
+    
+    # Reverse the path so that it starts from the start node
+    total_path.reverse()
     return total_path
+
+def _get_key_from_value(value: list[int, int], dictionary: dict) -> list[int, int]:
+    """
+    Returns the key of a dictionary based on the value
+    """
+    for key, val in dictionary.items():
+        if val == value:
+            return key
+    return None
 
 def a_star_heuristic(current_pos: list[int, int], goal_pos: list[int, int]) -> float:
     """
