@@ -342,7 +342,8 @@ class Map_Obj():
             ' : ': (96, 96, 96),   # darkgrey
             ' ; ': (36, 36, 36),   # blackish
             ' S ': (255, 0, 255),  # magenta
-            ' G ': (0, 128, 255)   # cyan
+            ' G ': (0, 128, 255),   # cyan
+            ' P ': (0, 255, 0),     # green
         }
         # Go through image and set pixel color for every position
         for y in range(height):
@@ -355,6 +356,12 @@ class Map_Obj():
                                y * scale + j] = colors[themap[y][x]]
         # Show image
         image.show()
+
+    def mark_path(self, path: list[list[int, int]]):
+        """ Mark the path on the map"""
+        for position in path:
+            self.set_cell_value(position, ' P ', str_map=True)
+        
     
     def get_neighbors(self, position: list[int, int]) -> list[list[int, int]]:
         """ Find all legal neighbors of a position"""
@@ -375,12 +382,12 @@ class Map_Obj():
     def _is_valid_neighbor(self, position: list[int, int]) -> bool:
         UN_WALKABLE = -1
         return self.get_cell_value(position) != UN_WALKABLE
+
     def set_goal_pos(self, goal_pos: list[int, int]):
         self.goal_pos = goal_pos
     
     def set_start_pos(self, start_pos: list[int, int]):
         self.start_pos = start_pos
-
 
 
 if __name__ == "__main__":
