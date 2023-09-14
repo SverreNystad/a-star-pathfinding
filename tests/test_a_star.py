@@ -39,3 +39,21 @@ def test_a_star_heuristic_negative_difference():
     manhattan_distance = a_star_heuristic(start_pos, goal_pos)
     # Assert
     assert manhattan_distance == 10
+
+def test_reconstructing_path():
+    # Arrange
+    came_from = {(0, 0): (0, 1), (0, 1): (0, 2), (0, 2): (0, 3)}
+    current = (0, 3)
+    # Act
+    total_path = reconstruct_path(came_from, current)
+    # Assert
+    assert total_path == [(0, 0), (0, 1), (0, 2), (0, 3)]
+
+def test_reconstructing_path_when_no_path_exists():
+    # Arrange
+    came_from = {(0, 0): (0, 1), (0, 1): (0, 2)}
+    current = (0, 3)
+    # Act
+    total_path = reconstruct_path(came_from, current)
+    # Assert
+    assert total_path == [(0, 3)]
