@@ -1,15 +1,62 @@
 import pytest
+from src.Map import Map_Obj
 from src.a_star import a_star_heuristic, reconstruct_path, Frontier
 
-# def test_frontier_init():
-#     # Arrange
-#     map = Map_Obj(task=1)
-#     start_pos = map.get_start_pos()
-#     frontier = Frontier(start_pos, map)
-#     # Act
-#     empty_frontier = frontier.get_frontier()
-#     # Assert
-#     assert empty_frontier == [start_pos]
+def test_frontier_init():
+    # Arrange
+    start_pos = (0, 0)
+    goal_pos = (0, 1)
+    frontier = Frontier(start_pos, goal_pos)
+    # Act
+    empty_frontier = frontier.get_frontier()
+    # Assert
+    assert empty_frontier == [start_pos]
+
+def test_frontier_pop_when_only_one_element():
+    # Arrange
+    start_pos = (0, 0)
+    goal_pos = (0, 1)
+    frontier = Frontier(start_pos, goal_pos)
+    # Act
+    popped_element = frontier.pop()
+    # Assert
+    assert popped_element == start_pos
+
+def test_frontier_pop_when_several_elements():
+    # Arrange
+    start_pos = (0, 0)
+    goal_pos = (0, 2)
+    neighbor_further_away_from_goal = [start_pos[0] + 1, start_pos[1]]
+    frontier = Frontier(start_pos, goal_pos)
+    frontier.insert(neighbor_further_away_from_goal)
+    # Act
+    popped_element = frontier.pop()
+    # Assert
+    assert popped_element == start_pos
+
+def test_frontier_insert():
+    # Arrange
+    start_pos = (0, 0)
+    goal_pos = (0, 2)
+    neighbor_further_away_from_goal = (start_pos[0] + 1, start_pos[1])
+    frontier = Frontier(start_pos, goal_pos)
+    # Act
+    frontier.insert(neighbor_further_away_from_goal)
+    # Assert
+    assert len(frontier.get_frontier()) == 2
+
+def test_frontier_insert_sorts_descending():
+    # Arrange
+    start_pos = (0, 0)
+    goal_pos = (0, 2)
+    neighbor_further_away_from_goal = (start_pos[0] + 1, start_pos[1])
+    frontier = Frontier(start_pos, goal_pos)
+
+    descending_frontier = [neighbor_further_away_from_goal, start_pos]
+    # Act
+    frontier.insert(neighbor_further_away_from_goal)
+    # Assert
+    assert frontier.get_frontier() == descending_frontier
 
 
 
