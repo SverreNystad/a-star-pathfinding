@@ -355,6 +355,27 @@ class Map_Obj():
                                y * scale + j] = colors[themap[y][x]]
         # Show image
         image.show()
+    
+    def get_neighbors(self, position: list[int, int]) -> list[list[int, int]]:
+        """ Find all legal neighbors of a position"""
+        neighbors = []
+        
+        # Check all 8 neighbors
+        for x in range(-1, 2):
+            for y in range(-1, 2):
+                # Skip the current position
+                if x == 0 and y == 0:
+                    continue
+                # Check if the neighbor is valid
+                neighbor = [position[0] + x, position[1] + y]
+                if self._is_valid_neighbor(neighbor):
+                    neighbors.append(neighbor)
+        return neighbors
+    
+    def _is_valid_neighbor(self, position: list[int, int]) -> bool:
+        UN_WALKABLE = -1
+        return self.get_cell_value(position) != UN_WALKABLE
+
 
 
 if __name__ == "__main__":
