@@ -111,14 +111,6 @@ def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int,
         total_path.append(current)
     return total_path
 
-def _get_key_from_value(value: list[int, int], dictionary: dict) -> list[int, int]:
-    """
-    Returns the key of a dictionary based on the value
-    """
-    for key, val in dictionary.items():
-        if val == value:
-            return key
-    return None
 
 def a_star_heuristic(current_pos: list[int, int], goal_pos: list[int, int]) -> float:
     """
