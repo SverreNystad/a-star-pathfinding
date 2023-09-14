@@ -355,38 +355,6 @@ class Map_Obj():
         image.show()
 
 
-    def a_star(self):
-        
-        frontier = Frontier(self.start_pos, self)
-
-        # For node n, came_from[n] is the node immediately preceding it on the cheapest path from the start to n currently known.
-        came_from = {}
-
-        g_score = {}
-        # The sentinel value is not infinity but rather None, So all values not explicitly set are None
-        g_score[self.start_pos] = 0
-
-        f_score = {}
-        f_score[self.start_pos] = self.a_star_heuristic(self.start_pos)
-
-        while not frontier.is_empty():
-            current = frontier.pop()
-            
-
-
-    def cost_estimate(self, position: list[int, int]) -> float:
-        """
-        cost = f(n) = g(n) + h(n)
-        """
-        return self.distance_from_start(position) + self.a_star_heuristic(position)
-    
-
-    def distance_from_start(self, pos: list[int, int]) -> float:
-        """
-        
-        """
-        return 0
-
 if __name__ == "__main__":
     # Instantiate a map object for task 1
     task_1_map = Map_Obj(1)
