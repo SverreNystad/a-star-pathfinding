@@ -67,7 +67,8 @@ def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int,
     # Need to find the parent of the value in the dictionary
     while True:
         parent = _get_key_from_value(current, came_from)
-        if parent is None:
+        # There must be a parent and the path must not be a loop
+        if parent is None or parent == current:
             break
         current = parent
         total_path.append(parent)
