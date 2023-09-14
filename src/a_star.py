@@ -85,7 +85,6 @@ def a_star(map: Map_Obj, start_pos: list[int, int]=None, goal_pos: list[int, int
                 estimated_remaining_distance[tuple(neighbor)] = tentative_cost_to_reach + a_star_heuristic(neighbor, goal_pos)
                 if neighbor not in frontier.get_frontier():
                     frontier.insert(neighbor)
-            # pass
     return None
 def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int, int]]:
     """
