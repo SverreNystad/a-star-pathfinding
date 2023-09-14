@@ -58,7 +58,17 @@ def test_frontier_insert_sorts_descending():
     # Assert
     assert frontier.get_frontier() == descending_frontier
 
-
+def test_frontier_inserting_same_element_twice():
+    # Arrange
+    start_pos = (0, 0)
+    goal_pos = (0, 2)
+    neighbor_further_away_from_goal = (start_pos[0] + 1, start_pos[1])
+    frontier = Frontier(start_pos, goal_pos)
+    # Act
+    frontier.insert(neighbor_further_away_from_goal)
+    frontier.insert(neighbor_further_away_from_goal)
+    # Assert # TODO FIND CORRECT ANSWER
+    # assert len(frontier.get_frontier()) == 2
 
 def test_a_star_heuristic_no_difference():
     # Arrange
