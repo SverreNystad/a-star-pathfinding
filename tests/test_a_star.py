@@ -1,6 +1,6 @@
 import pytest
 from src.Map import Map_Obj
-from src.a_star import a_star_heuristic, reconstruct_path, Frontier
+from src.a_star import a_star, a_star_heuristic, reconstruct_path, Frontier
 
 def test_frontier_init():
     # Arrange
@@ -137,3 +137,22 @@ def test_reconstructing_path_when_there_are_several_paths():
     # Assert
     assert total_path_1 == [(0, 0), (0, 1), (0, 2)]
     assert total_path_2 == [(10, 0), (9, 1), (8, 2)]
+
+
+def test_a_star():
+    # Arrange
+    map_obj = Map_Obj()
+    
+    # Act
+    path = a_star(map_obj)
+    # Assert
+    assert path != None
+
+def test_a_star_when_start_is_goal():
+    # Arrange
+    map_obj = Map_Obj()
+    map_obj.end_goal_pos = map_obj.start_pos
+    # Act
+    path = a_star(map_obj)
+    # Assert
+    assert path == [[0, 0]]
