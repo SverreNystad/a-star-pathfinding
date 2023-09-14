@@ -151,8 +151,8 @@ def test_a_star():
 def test_a_star_when_start_is_goal():
     # Arrange
     map_obj = Map_Obj()
-    map_obj.end_goal_pos = map_obj.start_pos
+
     # Act
-    path = a_star(map_obj)
+    path = a_star(map_obj, map_obj.start_pos, map_obj.start_pos)
     # Assert
-    assert path == [[0, 0]]
+    assert path == [map_obj.start_pos]
