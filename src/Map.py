@@ -375,6 +375,11 @@ class Map_Obj():
     def _is_valid_neighbor(self, position: list[int, int]) -> bool:
         UN_WALKABLE = -1
         return self.get_cell_value(position) != UN_WALKABLE
+    def set_goal_pos(self, goal_pos: list[int, int]):
+        self.goal_pos = goal_pos
+    
+    def set_start_pos(self, start_pos: list[int, int]):
+        self.start_pos = start_pos
 
 
 
