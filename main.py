@@ -28,9 +28,11 @@ if __name__ == '__main__':
     for task in range(1, TASKS+1):
         print(f"Task {task}:")
         run_a_star_for_task(task)
-    
-    print("Creating GIFs for the exploration of the maps...")
-    for task in range(1, TASKS+1):
-        print(f"Task {task}:")
-        run_a_star_for_task_with_creation_of_gif(task)
-        print(f"Created GIF for task {task}.")
+        print(f"Completed task {task}.")
+    user_input = input("Do you want to create GIFs for the exploration of the maps? (y/n): ")
+    if user_input.lower != "y":
+        print("Creating GIFs for the exploration of the maps...")
+        for task in range(1, TASKS+1):
+            print(f"Task {task}:")
+            run_a_star_for_task_with_creation_of_gif(task)
+            print(f"Created GIF for task {task}.")
