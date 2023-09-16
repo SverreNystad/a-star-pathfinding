@@ -8,6 +8,10 @@ def run_a_star_for_task(task_num):
     path = a_star(task_map)
     # Mark the path on the map
     task_map.mark_path(path)
+    # Add the start and goal positions to the map
+    themap = task_map.str_map
+    task_map.set_start_pos_str_marker(task_map.start_pos, themap)
+    task_map.set_goal_pos_str_marker(task_map.goal_pos, themap)
     task_map.show_map()
 
 if __name__ == '__main__':
