@@ -1,7 +1,8 @@
+from abc import ABC, ABCMeta, abstractmethod
 import numpy as np
 import pandas as pd
 from PIL import Image
-from typing import Union
+from typing import Any, Union
 
 np.set_printoptions(threshold=np.inf, linewidth=300)
 
@@ -9,8 +10,59 @@ np.set_printoptions(threshold=np.inf, linewidth=300)
 # Extended and documented by Xavier Sánchez-Díaz
 
 
+class Map(ABC):
+    """ A interface for the map with only the methods needed for the A* algorithm. """
 
-class Map_Obj():
+    @classmethod
+    def __instancecheck__(cls: ABCMeta, instance: Any) -> bool:
+        return cls.__subclasscheck__(type(instance))
+    
+    @classmethod
+    def __subclasscheck__(cls: ABCMeta, subclass: type) -> bool:
+        return (hasattr(subclass, 'get_neighbors') and
+                callable(subclass.get_neighbors) and
+                hasattr(subclass, 'set_start_pos') and
+                callable(subclass.set_start_pos) and
+                hasattr(subclass, 'set_goal_pos') and
+                callable(subclass.set_goal_pos) and
+                hasattr(subclass, 'get_start_pos') and
+                callable(subclass.get_start_pos) and
+                hasattr(subclass, 'get_goal_pos') and
+                callable(subclass.get_goal_pos) and
+                hasattr(subclass, 'get_cell_value') and
+                callable(subclass.get_cell_value))
+    
+    @abstractmethod
+    def get_neighbors(self, position: list[int, int]) -> list[list[int, int]]: 
+        """ Find all legal neighbors of a position"""
+        pass
+
+    @abstractmethod
+    def set_start_pos(start_pos: list[int,int]):
+        """Setter for the starting position"""
+        pass
+    
+    @abstractmethod
+    def set_goal_pos(goal_pos: list[int,int]):
+        """Setter for the goal position"""
+        pass
+
+    @abstractmethod
+    def get_start_pos():
+        """Getter for the starting position of the current task"""
+        pass
+    @abstractmethod
+    def get_goal_pos():
+        pass
+    
+    @abstractmethod
+    def get_cell_value(self, position: list[int, int]) -> int:
+        """Getter for the value (cost) of the cell at `pos`"""
+        pass
+
+
+
+class Map_Obj(Map):
     """
     A map object helper class.
 
