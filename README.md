@@ -43,6 +43,8 @@ python main.py
 ```
 ### Results
 To see the results of the different tasks look into the docs folder. Here the results are presented in a png files.
+<details>
+
 #### Task 1
 ![Task 1](docs/map_of_task_1.png)
 #### Task 2
@@ -53,6 +55,7 @@ To see the results of the different tasks look into the docs folder. Here the re
 ![Task 4](docs/map_of_task_4.png)
 #### Task 5
 ![Task 5](docs/map_of_task_5.png)
+</details>
 
 ## Installation
 To install the A star pathfinding, one needs to have all the prerequisites installed and set up, and follow the setup guild. The following sections will guide you through the process.
