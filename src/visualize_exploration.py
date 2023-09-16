@@ -1,5 +1,6 @@
 """ Creates a visualization of the exploration of the environment. """
 from PIL import Image, ImageDraw
+from copy import deepcopy
 
 from src.Map import Map
 from src.a_star import Frontier, a_star_heuristic, reconstruct_path
@@ -71,7 +72,7 @@ def a_star_with_visualization(map: Map, start_pos: list[int, int]=None, goal_pos
         path = reconstruct_path(came_from, tuple(current)) if current == goal_pos else []
         # Visualization
         frame = visualize(map, open_set, closed_set, path)
-        frames.append(frame)
+        frames.append(deepcopy(frame))
 
         if len(path) > 0:
             return frames
@@ -102,12 +103,6 @@ def visualize(map, open_set, closed_set, path) -> ImageDraw:
     for node in path:
         y, x = node
         draw.ellipse([x*SCALE, y*SCALE, (x+1)*SCALE, (y+1)*SCALE], outline="green", width=3)
-
+    map.image = image
     return image
 
-
-
-if __name__ == '__main__':
-    frames = a_star_with_visualization(Map(1))
-    # After the A* algorithm completes, compile the frames into a GIF
-    frames[0].save('astar_animation.gif', save_all=True, append_images=frames[1:], loop=0, duration=100)
