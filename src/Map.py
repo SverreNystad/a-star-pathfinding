@@ -98,6 +98,7 @@ class Map_Obj(Map):
         self.set_cell_value(self.goal_pos, ' G ')
         self.tick_counter = 0
         self.task = task
+        self.image = None
 
     def read_map(self, path: str) -> tuple[np.ndarray, str]:
         """
@@ -357,6 +358,8 @@ class Map_Obj(Map):
             themap[goal_pos[0]][goal_pos[1]] = ' G '
 
     def create_image(self, themap: Union[np.ndarray, str] = None) -> Image:
+        if self.image is not None:
+            return self.image
         # If a map is provided, set the goal and start positions
         if themap is not None:
             self.set_start_pos_str_marker(self.start_pos, themap)
@@ -398,8 +401,8 @@ class Map_Obj(Map):
                     for j in range(scale):
                         pixels[x * scale + i,
                                y * scale + j] = colors[themap[y][x]]
-        
-        return image
+        self.image = image
+        return self.image
 
     def show_map(self, themap: Union[np.ndarray, str] = None):
         """Draws `themap` as an image and shows it.
