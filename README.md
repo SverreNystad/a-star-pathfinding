@@ -65,8 +65,8 @@ To install the A star pathfinding, one needs to have all the prerequisites insta
 ### Setup
 1. Clone the repository
 ```bash
-git https://github.com/SverreNystad/A-star-pathfinding.git
-cd A-star-pathfinding
+git https://github.com/SverreNystad/a-star-pathfinding.git
+cd a-star-pathfinding
 ```
 2. Create a virtual environment (optional, but recommended)
     #### On Windows:
