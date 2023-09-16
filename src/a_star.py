@@ -51,6 +51,10 @@ def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=No
     """
     A* algorithm implementation
 
+    Args:
+        map (Map): The map on which the algorithm is run
+        start_pos (list[int, int], optional): The start position. Defaults to None.
+        goal_pos (list[int, int], optional): The goal position. Defaults to None.
     Returns:
         The path from the start to the goal node or None if no path exists
     """
@@ -86,7 +90,7 @@ def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=No
             return reconstruct_path(came_from, tuple(current))
 
         for neighbor in map.get_neighbors(current):
-            # d(current,neighbor) is the weight of the edge from current to neighbor
+            # Calculate the cost to reach the neighbor through current
             # tentative_cost_to_reach is the distance from start to the neighbor through current
             tentative_cost_to_reach = cost_to_reach_position[tuple(current)] + map.get_cell_value(neighbor)
             current_cost = cost_to_reach_position.get(tuple(neighbor))
@@ -97,6 +101,8 @@ def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=No
                 came_from[tuple(neighbor)] = tuple(current)
                 cost_to_reach_position[tuple(neighbor)] = tentative_cost_to_reach
                 estimated_remaining_distance[tuple(neighbor)] = tentative_cost_to_reach + a_star_heuristic(neighbor, goal_pos)
+                
+                # Add the neighbor to the frontier if it is not explored yet
                 if neighbor not in frontier.get_frontier():
                     frontier.insert(neighbor, tentative_cost_to_reach)
     return None
