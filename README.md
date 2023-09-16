@@ -47,14 +47,19 @@ To see the results of the different tasks look into the docs folder. Here the re
 
 #### Task 1
 ![Task 1](docs/map_of_task_1.png)
+![Task 1 exploration](docs/exploration_of_task_1.gif)
 #### Task 2
 ![Task 2](docs/map_of_task_2.png)
+![Task 2 exploration](docs/exploration_of_task_2.gif)
 #### Task 3
 ![Task 3](docs/map_of_task_3.png)
+![Task 3 exploration](docs/exploration_of_task_3.gif)
 #### Task 4
 ![Task 4](docs/map_of_task_4.png)
+![Task 4 exploration](docs/exploration_of_task_4.gif)
 #### Task 5
 ![Task 5](docs/map_of_task_5.png)
+![Task 5 exploration](docs/exploration_of_task_5.gif)
 </details>
 
 ## Installation
