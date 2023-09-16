@@ -41,11 +41,14 @@ When the proper setup is done, the program can be run by executing the following
 ```bash
 python main.py
 ```
+### Results
 To see the results of the different tasks look into the docs folder. Here the results are presented in a png files.
-To see the different options, run the following command:
-```bash
-python main.py --help
-```
+![Task 1](#docs/map_of_task_1.png)
+![Task 2](#docs/map_of_task_2.png)
+![Task 3](#docs/map_of_task_3.png)
+![Task 4](#docs/map_of_task_4.png)
+![Task 5](#docs/map_of_task_5.png)
+
 
 ## Installation
 To install the A star pathfinding, one needs to have all the prerequisites installed and set up, and follow the setup guild. The following sections will guide you through the process.
