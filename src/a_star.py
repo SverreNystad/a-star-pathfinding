@@ -1,4 +1,14 @@
+from dataclasses import dataclass
 from src.Map import Map_Obj
+
+
+@dataclass(frozen=True)
+class Node:
+    """
+    A node in the search tree. Contains the position and the cost to reach it.
+    """
+    position: list[int, int]
+    cost: float
 
 class Frontier:
     """
@@ -6,27 +16,31 @@ class Frontier:
     """
     def __init__(self, start_pos: list[int, int], goal_pos: list[int, int]):
         """ Instantiate a frontier object. """
-        self.frontier = [start_pos]
+        self.frontier = [Node(start_pos, 0)]
         self.goal_pos = goal_pos
 
     def get_frontier(self) -> list[int, int]:
         """ Getter for the frontier """
         return self.frontier
     
-    def insert(self, node: list[int, int]):
+    def insert(self, position: list[int, int], cost: float=0):
         """
         Inserts a node into the frontier. The node is inserted in the
-        correct position based on its cost.
+        correct position based on its cost and distance towards the goal.
+        Args:
+            position (list[int, int]): The position of the node
+            cost (float, optional): The cost to reach the node. Defaults to 0.
         """
-        self.frontier.append(node)
-        self.frontier.sort(reverse=True, key=lambda node: a_star_heuristic(node, self.goal_pos))
+        self.frontier.append(Node(position, cost))
+        self.frontier.sort(reverse=True, key=lambda node: node.cost + a_star_heuristic(node.position, self.goal_pos))
 
     def pop(self):
         """
         Finds the node with the lowest cost in the frontier and returns it.
         As the frontier is sorted, the node with the lowest cost is the last
         """
-        return self.frontier.pop()
+        node: Node = self.frontier.pop()
+        return node.position
     
     def is_empty(self):
         """ Checks if the frontier is empty """
@@ -84,7 +98,7 @@ def a_star(map: Map_Obj, start_pos: list[int, int]=None, goal_pos: list[int, int
                 cost_to_reach_position[tuple(neighbor)] = tentative_cost_to_reach
                 estimated_remaining_distance[tuple(neighbor)] = tentative_cost_to_reach + a_star_heuristic(neighbor, goal_pos)
                 if neighbor not in frontier.get_frontier():
-                    frontier.insert(neighbor)
+                    frontier.insert(neighbor, tentative_cost_to_reach)
     return None
 def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int, int]]:
     """
