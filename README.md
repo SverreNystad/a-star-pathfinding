@@ -28,7 +28,8 @@
       </ul>
     </li>
     <li><a href="#Tests">Tests</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#license">License</a></li>    
+    <li><a href="#acknowledgment">Acknowledgment</a></li>
   </ol>
 </details>
 
@@ -98,6 +99,16 @@ pytest --cov
 coverage html # To generate a coverage report
 ```
 
-### License
+## License
 Licensed under the [MIT License](LICENSE). Because sharing is caring :)
+
+
+## Acknowledgment
+The dataset of Samfundet (https://www.samfundet.no/) is not made by me, and most of the code in the class Map_Obj was created by Håkon Måløy then later extended and documented by Xavier Sánchez-Díaz.
+
+Thanks to the following libraries:
+- [Pillow](https://pillow.readthedocs.io/en/stable/) for image manipulation
+- [Pytest](https://docs.pytest.org/en/stable/) for testing
+- [NumPy](https://numpy.org/) for numerical computing
+- [Panadas](https://pandas.pydata.org/) for data analysis
 
