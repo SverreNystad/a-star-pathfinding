@@ -6,9 +6,6 @@ from typing import Any, Union
 
 np.set_printoptions(threshold=np.inf, linewidth=300)
 
-# Original code by Håkon Måløy
-# Extended and documented by Xavier Sánchez-Díaz
-
 
 class Map(ABC):
     """ A interface for the map with only the methods needed for the A* algorithm. """
@@ -60,7 +57,8 @@ class Map(ABC):
         """Getter for the value (cost) of the cell at `pos`"""
         pass
 
-
+# Original code by Håkon Måløy
+# Extended and documented by Xavier Sánchez-Díaz
 
 class Map_Obj(Map):
     """
@@ -99,6 +97,7 @@ class Map_Obj(Map):
         self.set_cell_value(self.start_pos, ' S ')
         self.set_cell_value(self.goal_pos, ' G ')
         self.tick_counter = 0
+        self.task = task
 
     def read_map(self, path: str) -> tuple[np.ndarray, str]:
         """
@@ -408,6 +407,7 @@ class Map_Obj(Map):
                                y * scale + j] = colors[themap[y][x]]
         # Show image
         image.show()
+        image.save(f'docs/map_of_task_{self.task}.png')
 
     def mark_path(self, path: list[list[int, int]]):
         """ Mark the path on the map"""
@@ -440,17 +440,3 @@ class Map_Obj(Map):
     
     def set_start_pos(self, start_pos: list[int, int]):
         self.start_pos = start_pos
-
-
-if __name__ == "__main__":
-    # Instantiate a map object for task 1
-    task_1_map = Map_Obj(1)
-    task_1_map.show_map()
-
-    # Instantiate a map object for task 2
-    task_2_map = Map_Obj(2)
-    task_2_map.show_map()
-
-    # Instantiate a map object for task 3
-    task_3_map = Map_Obj(3)
-    task_3_map.show_map()
