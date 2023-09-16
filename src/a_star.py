@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.Map import Map_Obj
+from src.Map import Map
 
 
 @dataclass(frozen=True)
@@ -47,7 +47,7 @@ class Frontier:
         return len(self.frontier) == 0
     
 
-def a_star(map: Map_Obj, start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
+def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
     """
     A* algorithm implementation
 
