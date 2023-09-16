@@ -6,7 +6,7 @@
 [![codecov.io](https://codecov.io/github/SverreNystad/a-star-pathfinding/coverage.svg?branch=main)](https://codecov.io/github/SverreNystad/a-star-pathfinding?branch=main)
 ![GPT-dungeon-master top language](https://img.shields.io/github/languages/top/SverreNystad/a-star-pathfinding)
 ![GitHub language count](https://img.shields.io/github/languages/count/SverreNystad/a-star-pathfinding)
-[![Project Version](https://img.shields.io/badge/version-0.0.1-blue)](https://img.shields.io/badge/version-0.0.1-blue)
+[![Project Version](https://img.shields.io/badge/version-1.0.0-blue)](https://img.shields.io/badge/version-1.0.0-blue)
 
 </div>
 
