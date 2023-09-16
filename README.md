@@ -1,4 +1,4 @@
-# PROJECT NAME
+# A* path finding
 
 <div align="center">
 
@@ -14,7 +14,7 @@
   <summary> <b> Table of Contents </b> </summary>
   <ol>
     <li>
-    <a href="#standard_python_application"> PROJECT NAME </a>
+    <a href="#A* path finding"> A* path finding</a>
     </li>
     <li>
       <a href="#Introduction">Introduction</a>

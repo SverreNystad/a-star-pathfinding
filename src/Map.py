@@ -356,6 +356,51 @@ class Map_Obj(Map):
         else:
             themap[goal_pos[0]][goal_pos[1]] = ' G '
 
+    def create_image(self, themap: Union[np.ndarray, str] = None) -> Image:
+        # If a map is provided, set the goal and start positions
+        if themap is not None:
+            self.set_start_pos_str_marker(self.start_pos, themap)
+            self.set_goal_pos_str_marker(self.goal_pos, themap)
+        # If no map is provided, use string_map
+        else:
+            themap = self.str_map
+
+        # Define width and height of image
+        width = themap.shape[1]
+        height = themap.shape[0]
+        # Define scale of the image
+        scale = 20
+        # Create an all-yellow image
+        image = Image.new('RGB', (width * scale, height * scale),
+                          (255, 255, 0))
+        # Load image
+        pixels = image.load()
+
+        # Define what colors to give to different values of the string map
+        # (undefined values will remain yellow, this is
+        # how the yellow path is painted)
+        colors = {
+            ' # ': (211, 33, 45),  # redish
+            ' . ': (215, 215, 215),  # whiteish
+            ' , ': (166, 166, 166),  # lightgrey
+            ' : ': (96, 96, 96),   # darkgrey
+            ' ; ': (36, 36, 36),   # blackish
+            ' S ': (255, 0, 255),  # magenta
+            ' G ': (0, 128, 255),   # cyan
+            ' P ': (0, 255, 0),     # green
+        }
+        # Go through image and set pixel color for every position
+        for y in range(height):
+            for x in range(width):
+                if themap[y][x] not in colors:
+                    continue
+                for i in range(scale):
+                    for j in range(scale):
+                        pixels[x * scale + i,
+                               y * scale + j] = colors[themap[y][x]]
+        
+        return image
+
     def show_map(self, themap: Union[np.ndarray, str] = None):
         """Draws `themap` as an image and shows it.
 
