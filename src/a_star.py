@@ -45,7 +45,6 @@ class Frontier:
     def is_empty(self):
         """ Checks if the frontier is empty """
         return len(self.frontier) == 0
-    
 
 def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
     """
@@ -106,20 +105,17 @@ def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=No
                 if neighbor not in frontier.get_frontier():
                     frontier.insert(neighbor, tentative_cost_to_reach)
     return None
+
 def reconstruct_path(came_from: dict, current: list[int, int]) -> list[list[int, int]]:
     """
     Reconstructs the path from the start to the goal node
+    
+    Args:
+        came_from (dict):  Dictionary with the path from the start to the goal node
+        current (list[int, int]): The goal node
 
-    Parameters
-    ----------
-    came_from : dict
-        Dictionary with the path from the start to the goal node
-    current : list[int, int]
-        The goal node
-
-    Returns
-    -------
-    list[list[int, int]]
+    Returns:
+        list[list[int, int]]
         The path from the start to the goal node
     """
     total_path = [current]
@@ -136,15 +132,11 @@ def a_star_heuristic(current_pos: list[int, int], goal_pos: list[int, int]) -> f
     """
     A heuristic function for A*. Calculates the manhattan distance
 
-    Parameters
-    ----------
-    pos : list[int, int]
-        Position for which we want to calculate the heuristic
-
-    Returns
-    -------
-    float
-        Heuristic value for `pos`
+    Args:
+        current_pos (list[int, int]): The current position
+        goal_pos (list[int, int]): The goal position
+    Returns:
+        float: The heuristic value
     """
     # Calculate the heuristic value for the given position
     # Manhatten distance = |x1 - x2| + |y1 - y2|

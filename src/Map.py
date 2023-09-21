@@ -295,8 +295,7 @@ class Map_Obj(Map):
         Moves the current goal position every 4th call if current goal
         position is not already at the end_goal position.
 
-        Returns
-        -------
+        Returns:
         pos : list[int, int]
             New position of the goal.
         """
@@ -466,17 +465,12 @@ class Map_Obj(Map):
     def get_neighbors(self, position: list[int, int]) -> list[list[int, int]]:
         """ Find all legal neighbors of a position"""
         neighbors = []
-        
-        # Check all 8 neighbors
-        for x in range(-1, 2):
-            for y in range(-1, 2):
-                # Skip the current position
-                if x == 0 and y == 0:
-                    continue
-                # Check if the neighbor is valid
-                neighbor = [position[0] + x, position[1] + y]
-                if self._is_valid_neighbor(neighbor):
-                    neighbors.append(neighbor)
+
+        directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        for direction in directions:
+            neighbor = [position[0] + direction[0], position[1] + direction[1]]
+            if self._is_valid_neighbor(neighbor):
+                neighbors.append(neighbor)
         return neighbors
     
     def _is_valid_neighbor(self, position: list[int, int]) -> bool:

@@ -5,7 +5,7 @@ from copy import deepcopy
 from src.Map import Map
 from src.a_star import Frontier, a_star_heuristic, reconstruct_path
 
-def a_star_with_visualization(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
+def a_star_with_visualization(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=None) -> list:
     """
     A* algorithm implementation
 

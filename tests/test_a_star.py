@@ -113,7 +113,7 @@ def test_reconstructing_path_when_no_path_exists():
     # Act
     total_path = reconstruct_path(came_from, current)
     # Assert
-    assert total_path == [(0, 3)]
+    assert total_path == [current]
 
 def test_reconstructing_path_when_start_is_goal():
     # Arrange
