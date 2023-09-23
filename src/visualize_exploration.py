@@ -1,5 +1,5 @@
 """ Creates a visualization of the exploration of the environment. """
-from PIL import Image, ImageDraw
+from PIL import ImageDraw
 from copy import deepcopy
 
 from src.Map import Map
@@ -68,6 +68,7 @@ def a_star_with_visualization(map: Map, start_pos: list[int, int]=None, goal_pos
                 # Add the neighbor to the frontier if it is not explored yet
                 if neighbor not in frontier.get_frontier():
                     frontier.insert(neighbor, tentative_cost_to_reach)
+        
         open_set -= closed_set
         path = reconstruct_path(came_from, tuple(current)) if current == goal_pos else []
         # Visualization
@@ -80,13 +81,22 @@ def a_star_with_visualization(map: Map, start_pos: list[int, int]=None, goal_pos
     return None
 
 
-def visualize(map, open_set, closed_set, path) -> ImageDraw:
+def visualize(map: Map, open_set: set, closed_set: set, path: list) -> ImageDraw:
+    """
+    Visualizes the exploration of the environment
+
+    Args:
+        map (Map): The map on which the algorithm is run
+        open_set (set): The set of nodes that are currently being explored
+        closed_set (set): The set of nodes that have been explored
+        path (list): The path from the start to the goal node
+    Returns:
+        The image of the environment
+    """
     # Define scale of the image
     SCALE = 20
     # Create an all-yellow image
     image = map.create_image()
-    # image = Image.new('RGB', (width * SCALE, height * SCALE),
-    #                   (255, 255, 0))
     draw = ImageDraw.Draw(image)
 
     # Draw open set in blue
