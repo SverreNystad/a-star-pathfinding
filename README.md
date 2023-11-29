@@ -65,8 +65,10 @@ To see the results of the different tasks look into the docs folder. Here the re
 
 ## Installation
 To install the A star pathfinding, one needs to have all the prerequisites installed and set up, and follow the setup guild. The following sections will guide you through the process.
+
 ### Prerequisites
-- Python 3.9 or higher
+- Ensure that git is installed on your machine. [Download Git](https://git-scm.com/downloads)
+- Ensure Python 3.9 or newer is installed on your machine. [Download Python](https://www.python.org/downloads/)
 
 ### Setup
 1. Clone the repository
