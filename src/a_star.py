@@ -46,7 +46,7 @@ class Frontier:
         """ Checks if the frontier is empty """
         return len(self.frontier) == 0
 
-def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=None):
+def a_star(map: Map, start_pos: list[int, int]=None, goal_pos: list[int, int]=None) -> list[list[int, int]]:
     """
     A* algorithm implementation
 
